@@ -16,44 +16,57 @@ namespace Ovningar_konvert_niva2_10_09_26
             Console.WriteLine("Öv 5" +
                 "\n");
            
+            // We define the variabels first outside the loops
             int num1 = 0;
             int num2 = 0;
             string math = "";
             int result = 0;
 
+            // We run 3 seperate loops in order to verify each input seperately
+
+            // Loop for the first number (num1)
             while (true)
             {
                 try
                 {
+                    // If int.parse works we break the loop
                     Console.Write("Ange första talet: ");
                     num1 = int.Parse(Console.ReadLine());
                     break;
                 }
+                    // If the user inputs anything other than an int we catch it here and give them an error message
                 catch (FormatException)
                 {
                     Console.WriteLine("Fel inmatning, endast heltal för miniräknaren. Försök igen!");
                 }
             }
             
+            // Loop for the operator (math)
             while (true)
             {
                 Console.Write("Ange räknesätt (+, -, *, /): ");
                 math = Console.ReadLine();
 
+                // Here we don't need to use try/catch, we just need to check if it's any of our 4 options
                 if (math == "+" || math == "-" || math == "*" || math == "/")
                 {
+                    // If the input is valid we break the loop
                     break;
                 }
                 else
                 {
+                    // If it is anything other than +,-,*,/ we give an error messages and return to the input again
                     Console.WriteLine("Endast +, -, *, / är gilltliga räknesätt" +
                         "\nFörsök igen!");
                 }   
             }
+
+            // Loop for the 2nd number (num2)
             while (true)
             {
                 try
                 {
+                    // Here we use switch and case in order to give the proper result for the operator
                     Console.Write("Ange andra talet: ");
                     num2 = int.Parse(Console.ReadLine());
                     switch (math)
@@ -73,28 +86,22 @@ namespace Ovningar_konvert_niva2_10_09_26
                     }
                     break;
                 }
+                // We catch if the user enters anything other than an int and print an error message
                 catch (FormatException)
                 {
                     Console.WriteLine("Fel inmatning, endast heltal för miniräknaren. Försök igen!");
                 }
+                // Here we catch if the user tries to divide by zero
                 catch (DivideByZeroException)
                 {
                     Console.WriteLine("Fel inmatning, 0 är inte ett giltligt tal vid division. Försök igen!");
                 }
             }
+            // If num1, the operator, and num3 all pass their loops we print the result here
             Console.WriteLine($"\n" +
                 $"Beräknar... " +
                 $"\n{num1} {math} {num2} = {result}" +
                 $"\n");
-
-
-
-
-
-
-
-
-
 
 
 
