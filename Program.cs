@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 using System.Numerics;
 
 namespace Ovningar_konvert_niva2_10_09_26
@@ -112,18 +113,51 @@ namespace Ovningar_konvert_niva2_10_09_26
             // När användaren gissar rätt ska antalet gissningar visas.
             Console.WriteLine("Öv 6" +
              "\n");
+            Console.Write("Gissa numret mellan 1 och 100: ");
 
+            // We set our secretNumber as a random int between 1 and 100
+            // The random number will change everytime the program is run
+            int secretNumber = new Random().Next(1,100);
+            int antalGissningar = 0;
 
-
-
-
-
-
-
-
-
-
-
+            // We use a loop to allow multiple guesses
+            while (true)
+            {
+                try
+                {
+                    // We use try to check if the guess is an int or not
+                    Console.Write("Gissa numret: ");
+                    int guess = int.Parse(Console.ReadLine());
+                    if (guess > secretNumber)
+                    {
+                        // If the guess is larger than the secretNumber we print this
+                        // and add +1 to the number of guesses (antalGissningar)
+                        Console.WriteLine("Lägre!");
+                        antalGissningar++;
+                    }
+                    else if (guess < secretNumber)
+                    {
+                        // If the guess is smaller than the secretNumber we print this
+                        // and add +1 to the number of guesses (antalGissningar)
+                        Console.WriteLine("Högre!");
+                        antalGissningar++;
+                    }
+                    else
+                    {
+                        // If the guess is correct we print this, alongside the number of guesses
+                        // and then we break the loop
+                        Console.WriteLine($"Det hemliga numret var: {secretNumber}!" +
+                            $"\nRätt gissat efter " + antalGissningar + " gissningar." +
+                            "\n");
+                        break;
+                    }
+                }
+                // If the guess i not an int we catch it here and print an error message
+                catch (FormatException)
+                {
+                    Console.WriteLine("Du måste ange ett heltal för att gissa!");
+                }
+            }
 
             // Öv 7
             // Skapa ett program där du deklarerar tre variabler med var och tre med dynamic.
@@ -133,17 +167,63 @@ namespace Ovningar_konvert_niva2_10_09_26
             Console.WriteLine("Öv 7" +
              "\n");
 
+            // Variable 1,2,3
+            var var1 = "StringTypeVar";
+            var var2 = 1;
+            var var3 = true;
 
+            // Dynamic 1,2,3
+            dynamic dyn1 = "MyDynamic1";
+            dynamic dyn2 = "10";
+            dynamic dyn3 = false;
 
+            // Dyn1 is a string when we print the first message
+            Console.WriteLine($"{dyn1} är en {dyn1.GetType()} dynamisk variabel.");
+            Console.Write("Tryck på valfri tangent för att ändra variabeln:");
+            Console.ReadKey();
+            // After readkey we redefine the dyn1 to an int instead
+            // and the program now checks the code again when it reads this part
+            // so the dynamic variable now reads as an int
+            dyn1 = 25;
+            Console.WriteLine($"{dyn1} är nu en {dyn1.GetType()} dynamisk variabel istället!" +
+                $"\n");
 
+            Console.WriteLine($"Nu provar vi att multiplicera med dyn3, som är en {dyn3.GetType()}");
 
+            // We use a loop to try to multiply our boolean dynamic variable with itself
+            // which allows us to try again if we catch the error
+            while (true)
+            {
+                // We use the Total variable to check if we succefully multiplied dyn3
+                var Total = 0;
+                Console.Write($"Tryck på valfri tangent för att försöka multiplicera dyn3 med sig själv...");
+                Console.ReadKey();
+                try
+                {
+                    // VisualStudio does not underline this code since the dynamic
+                    // variable isn't read until we run the program
+                    // So it doesn't know that dyn3 is a bool
+                    Total = dyn3 * dyn3;
+                    Console.WriteLine($"{Total}, är {dyn3}^2!");
+                }
+                // We catch the error here
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR! Försökte multiplicera {dyn3.GetType()}");
+                    // And change the type of dyn3 to an int here
+                    dyn3 = 9;
+                    Console.WriteLine($"Ändrar den dynamiska variabeln till en {dyn3.GetType()}.");
+                }
+                // When we can succefully multiply dyn3 with itself we break the loop here
+                if (Total >0)
+                    break;
+            }
+            // A var is a fixed variable whoose type is defined before the program is run
+            // and produces an error in VisualStudio if there's a conflict
 
-
-
-
-
-
-            Console.WriteLine("Hello, World!");
+            // A dynamic is a variable that isn't defined untill the program runs the code
+            // and does not produce an error in VisualStudio if there's a conflict,
+            // which means a program can run succesfully until it encounters the problomatic dynamic
         }
     }
 }
