@@ -15,13 +15,14 @@ namespace Ovningar_konvert_niva2_10_09_26
             // Bygg en miniräknare som frågar efter två tal och ett räknesätt (+, -, *, /).
             // Använd try-catch för att hantera felaktig inmatning och division med noll, så att programmet aldrig kraschar.
             Console.WriteLine("Öv 5" +
+                "\n Miniräknaren!" +
                 "\n");
            
             // We define the variabels first outside the loops
-            int num1 = 0;
-            int num2 = 0;
+            double num1 = 0.0;
+            double num2 = 0.0;
             string math = "";
-            int result = 0;
+            double result = 0.0;
 
             // We run 3 seperate loops in order to verify each input seperately
 
@@ -32,13 +33,14 @@ namespace Ovningar_konvert_niva2_10_09_26
                 {
                     // If int.parse works we break the loop
                     Console.Write("Ange första talet: ");
-                    num1 = int.Parse(Console.ReadLine());
+                    num1 = double.Parse(Console.ReadLine());
                     break;
                 }
                     // If the user inputs anything other than an int we catch it here and give them an error message
                 catch (FormatException)
                 {
-                    Console.WriteLine("Fel inmatning, endast heltal för miniräknaren. Försök igen!");
+                    Console.WriteLine("Fel inmatning, endast heltal eller decimal tal med , accepteras (t ex 2 eller 5,3)." +
+                        "\nFörsök igen!");
                 }
             }
             
@@ -69,7 +71,7 @@ namespace Ovningar_konvert_niva2_10_09_26
                 {
                     // Here we use switch and case in order to give the proper result for the operator
                     Console.Write("Ange andra talet: ");
-                    num2 = int.Parse(Console.ReadLine());
+                    num2 = double.Parse(Console.ReadLine());
                     switch (math)
                     {
                         case "+":
@@ -90,7 +92,8 @@ namespace Ovningar_konvert_niva2_10_09_26
                 // We catch if the user enters anything other than an int and print an error message
                 catch (FormatException)
                 {
-                    Console.WriteLine("Fel inmatning, endast heltal för miniräknaren. Försök igen!");
+                    Console.WriteLine("Fel inmatning, endast heltal eller decimal tal med , accepteras (t ex 2 eller 5,3)." +
+                        "\nFörsök igen!");
                 }
                 // Here we catch if the user tries to divide by zero
                 catch (DivideByZeroException)
