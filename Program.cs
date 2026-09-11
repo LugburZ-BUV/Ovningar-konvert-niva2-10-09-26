@@ -36,7 +36,7 @@ namespace Ovningar_konvert_niva2_10_09_26
                     num1 = double.Parse(Console.ReadLine());
                     break;
                 }
-                    // If the user inputs anything other than an int we catch it here and give them an error message
+                    // If the user inputs anything other than a double we catch it here and give them an error message
                 catch (FormatException)
                 {
                     Console.WriteLine("Fel inmatning, endast heltal eller decimal tal med , accepteras (t ex 2 eller 5,3)." +
@@ -89,7 +89,7 @@ namespace Ovningar_konvert_niva2_10_09_26
                     }
                     break;
                 }
-                // We catch if the user enters anything other than an int and print an error message
+                // We catch if the user enters anything other than a double and print an error message
                 catch (FormatException)
                 {
                     Console.WriteLine("Fel inmatning, endast heltal eller decimal tal med , accepteras (t ex 2 eller 5,3)." +
